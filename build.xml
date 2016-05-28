@@ -53,7 +53,7 @@
     </taskdef>
 
     <target name="hashlist-example" depends="jar">
-        <hashlist file="output.json" checksums="md5, sha-256, sha-1">
+        <hashlist fileName="output.json" checksumTypes="md5, sha-256, sha-1">
             <fileset dir="lib"/>
             <fileset dir="src"/>
         </hashlist>
