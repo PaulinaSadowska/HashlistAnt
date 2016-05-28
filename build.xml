@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="hashlist-task">
+    <property file="local.properties"/>
+    <property file="default.properties"/>
+
+    <taskdef resource="org/codehaus/groovy/antlib.xml">
+        <classpath path="lib/groovy-all-2.4.3.jar"/>
+    </taskdef>
+
+
+    <target name="init">
+        <mkdir dir="build"/>
+        <mkdir dir="jars"/>
+    </target>
+
+    <target name="build" depends="init">
+        <groovyc destdir="build">
+            <src path="src"/>
+            <classpath refid="hashlist-task.classpath"/>
+        </groovyc>
+
+        <copy todir="build">
+            <fileset dir="src" excludes="**/*.groovy" />
+        </copy>
+    </target>
+
+    <path id="hashlist-task.classpath">
+        <pathelement location="build"/>
+        <pathelement path="jars/Hashlist.jar"/>
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="jar" description="JARs the Task" depends="build">
+        <jar destfile="jars/Hashlist.jar" basedir="build/"/>
+    </target>
+
+    <target name="clean" >
+        <delete dir="build"/>
+        <delete dir="jars"/>
+    </target>
+
+    <target name="groovy.console">
+        <java classname="groovy.ui.Console" fork="true" spawn="true">
+            <classpath path="lib/groovy-all-2.4.3.jar"/>
+        </java>
+    </target>
+
+    <taskdef name="hashlist" classname="groovy.custom.tasks.HashList">
+        <classpath refid="hashlist-task.classpath">
+        </classpath>
+    </taskdef>
+
+    <target name="hashlist-example" depends="jar">
+        <hashlist file="output.json" checksums="md5, sha-256, sha-1">
+            <fileset dir="lib"/>
+            <fileset dir="src"/>
+        </hashlist>
+    </target>
+
+
+</project>
