@@ -8,7 +8,7 @@ import org.junit.Test
 /**
  * Created by Paulina Sadowska on 28.05.2016.
  */
-class HashListTest {
+class HashlistTest {
 
     public final BuildFileRule buildFileRule = new BuildFileRule();
 

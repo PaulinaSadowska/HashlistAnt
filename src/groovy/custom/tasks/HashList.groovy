@@ -11,7 +11,7 @@ import java.security.MessageDigest;
 /**
  * Created by Paulina Sadowska on 28.05.2016.
  */
-class HashList extends Task {
+class Hashlist extends Task {
 
     private String defaultHashesPropertyName = "hashlist.default_hashes";
     String fileName = "hashlistOutput.json";
@@ -38,9 +38,9 @@ class HashList extends Task {
             def currentDirectoryScanner = it.getDirectoryScanner(project);
             outputCollection.add("files": currentDirectoryScanner.getIncludedFiles()
                     .collect {
-                filePath ->
-                    def file = new File("${currentDirectoryScanner.getBasedir().absolutePath}/${filePath}");
-                    def output = ["path": filePath, "size": file.length(), modified: new Date(file.lastModified()).format("yyyy-MM-dd HH:mm:ss")]
+                path ->
+                    def file = new File("${currentDirectoryScanner.getBasedir().absolutePath}/${path}");
+                    def output = ["path": path, "size": file.length(), modified: new Date(file.lastModified()).format("yyyy-MM-dd HH:mm:ss")]
                     checksumList.each {
                         checksum ->
                             def value = MessageDigest.getInstance(checksum);

@@ -15,7 +15,7 @@
 
     <target name="build" depends="init">
         <groovyc destdir="build">
-            <src path="src"/>
+            <src path="src/groovy"/>
             <classpath refid="hashlist-task.classpath"/>
         </groovyc>
 
@@ -47,7 +47,7 @@
         </java>
     </target>
 
-    <taskdef name="hashlist" classname="groovy.custom.tasks.HashList">
+    <taskdef name="hashlist" classname="groovy.custom.tasks.Hashlist">
         <classpath refid="hashlist-task.classpath">
         </classpath>
     </taskdef>
@@ -58,6 +58,5 @@
             <fileset dir="src"/>
         </hashlist>
     </target>
-
 
 </project>
